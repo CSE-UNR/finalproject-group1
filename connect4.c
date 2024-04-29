@@ -7,6 +7,7 @@ Purpose: Connect 4*/
 int main () {
 
     printf("Connect 4");
+    printf("\nEditing a shared doc.\n");
 
 
 }
