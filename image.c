@@ -8,57 +8,30 @@ Purpose: To be able to take an image and edit it per user's preference such as d
 #include <stdio.h>
 
 #define IMAGENAME 100
-#define FILE_NAME "lebron.jpg"
-
 
 int displaymenu();
+void loadimage();
 
 int main (){
 
     int choicefinal;
-    int choice;
+    do{
+        choicefinal = displaymenu();
+        loadimage(choicefinal);
 
-    choicefinal = displaymenu();
-
-
-
-        if(choicefinal == 1){
-
-            char imagename[IMAGENAME];
-            printf("What is the name of the image file? ");
-            scanf("%s", imagename);
-            
-            FILE *image;
-
-            image = fopen(FILE_NAME, "r");
-
-            if(image == NULL){
-                printf("\nCould not find an image with that filename.");
-            
-            }
-
-        else{
-
-                fclose(image);
-                printf("Loaded Image successfully");
-
-            }
-        }
-
-        else{
-            printf("Invalid option, please try again.\n");
-
-        }
+    }while(choicefinal != 0);
         
-    
-        return 0;    
+    return 0;    
 
 
 }
 
 int displaymenu(){
 
-    int choice; 
+int choice; 
+
+do{
+    
 
     printf("**ERINSTAGRAM**\n");
     printf("1. Load Image\n");
@@ -70,8 +43,42 @@ int displaymenu(){
 
     return choice;
 
+}while(choice != 0);
+
 }
 
-void loadimage (){
-    
+void loadimage(int choicefinal){
+
+
+        if(choicefinal == 1){
+
+            char imagename[IMAGENAME];
+            printf("What is the name of the image file? ");
+            scanf("%s", imagename);
+            
+            FILE *image;
+
+            image = fopen(imagename, "r");
+
+            if(image == NULL){
+                printf("Could not find an image with that filename.\n");
+            
+            }
+
+            else{
+
+                fclose(image);
+                printf("\nImage successfully loaded!\n");
+
+            }
+        }
+
+        else{
+            
+            printf("Invalid option, please try again.\n");
+
+        }
+        
+
+
 }
