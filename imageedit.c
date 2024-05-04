@@ -1,4 +1,5 @@
-/*Name: Rahul Bokka
+/*
+Name: Rahul Bokka and Lorena
 Date: 04 May 2024
 Purpose: To be able to take an image and edit it per user's preference such as dim, brighten, rotate
 */
@@ -24,6 +25,8 @@ int main (){
     if(fp == NULL){
         printf("Can't open file \n");
     }
+
+    else()
 
     printf("What would you like to do?");
     printf("1. Load New Image");
