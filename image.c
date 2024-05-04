@@ -20,7 +20,13 @@ int main (){
         loadimage(choicefinal);
 
     }while(choicefinal != 0);
-        
+    
+    if(choicefinal == 0){
+
+        printf("\nGoodbye!\n");
+
+    }
+
     return 0;    
 
 
@@ -30,9 +36,6 @@ int displaymenu(){
 
 int choice; 
 
-do{
-    
-
     printf("**ERINSTAGRAM**\n");
     printf("1. Load Image\n");
     printf("2. Display image\n");
@@ -41,44 +44,46 @@ do{
     printf("\nChoose from one of the options above: ");
     scanf("%d", &choice);
 
+
     return choice;
 
-}while(choice != 0);
 
 }
 
 void loadimage(int choicefinal){
 
+    if(choicefinal == 1){
 
-        if(choicefinal == 1){
-
-            char imagename[IMAGENAME];
-            printf("What is the name of the image file? ");
-            scanf("%s", imagename);
+        char imagename[IMAGENAME];
+        printf("What is the name of the image file? ");
+        scanf("%s", imagename);
             
-            FILE *image;
+        FILE *image;
 
-            image = fopen(imagename, "r");
+        image = fopen(imagename, "r");
 
-            if(image == NULL){
-                printf("Could not find an image with that filename.\n");
+        if(image == NULL){
+                
+            printf("Could not find an image with that filename.\n");
             
-            }
-
-            else{
-
-                fclose(image);
-                printf("\nImage successfully loaded!\n");
-
-            }
         }
 
         else{
-            
-            printf("Invalid option, please try again.\n");
 
+            fclose(image);
+            printf("\nImage successfully loaded!\n\n");
+
+            }
         }
+
+}
         
+void displayimage(){
+
+    if(choicefinal == 2){
+        
+    }
+
 
 
 }
