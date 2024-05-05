@@ -8,11 +8,14 @@ Purpose: To be able to take an image and edit it per user's preference such as d
 #include <stdio.h>
 
 #define IMAGENAME 100
+#define MAX_ROWS 100
+#define MAX_COLUMNS 100
 
 int displaymenu();
 void loadimage();
 
 int main (){
+int 2Darray[MAX_ROWS][MAX_COLUMNS];
 
     int choicefinal;
     do{
@@ -51,7 +54,6 @@ int choice;
 }
 
 void loadimage(int choicefinal){
-
     if(choicefinal == 1){
 
         char imagename[IMAGENAME];
@@ -78,7 +80,7 @@ void loadimage(int choicefinal){
 
 }
         
-void displayimage(){
+void displayimage(int choicefinal){
 
     if(choicefinal == 2){
         
