@@ -15,6 +15,7 @@ int displaymenu();
 void loadimage();
 void dimImage(int rows, int columns, int inputarrayhere[][columns]);
 void brightenImage(int rows, int columns, int inputarrayhere[][columns]);
+void cropImage(int startcolumn, int endcolumn, int startrow, int endrow, int rows, int columns, int inputarrayhere[][columns]);
 void saveFile(char filename, int rows, int columns, int newarrayhere[][columns]);
 
 int main (){
@@ -140,5 +141,7 @@ void brightenImage(int rows, int columns, int inputarrayhere[][columns]){
 	}
 
 }
+
+void cropImage(int startcolumn, int endcolumn, int startrow, int endrow, int rows, int columns, int inputarrayhere[][columns]){ }
 
 void saveFile(char filename, int rows, int columns, int newarrayhere[][columns]){}
