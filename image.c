@@ -14,6 +14,8 @@ Purpose: To be able to take an image and edit it per user's preference such as d
 int displaymenu();
 void loadimage();
 void dimImage(int rows, int columns, int inputarrayhere[][columns]);
+void brightenImage(int rows, int columns, int inputarrayhere[][columns]);
+void saveFile(char filename, int rows, int columns, int newarrayhere[][columns]);
 
 int main (){
 int imagearray[MAX_ROWS][MAX_COLUMNS];
@@ -92,14 +94,51 @@ void displayimage(int choicefinal){
 }
 
 void dimImage(int rows, int columns, int inputarrayhere[][columns]){
-	for(int rowi=0; rowi<=rows; rowi++){
+	char answer;
+	char str[IMAGENAME];
+	for(int rowi=0; rowi<rows; rowi++){
 		for(int coli=0; coli<columns; coli++){
 			if(inputarrayhere[rowi][coli] > 0){
 				inputarrayhere[rowi][coli]--;
 			}
 		}
+	}
+	
 	//displayimage(rows, columns, inputarrayhere);
+	
+	printf("\nWould you like to save the file? (y/n)" );
+	scanf(" %c", &answer);
+	
+	if(answer == 'y' || answer == 'Y'){
+		printf("\nWhat do you want to name the image file? (include the extension) ");
+		fgets(str, IMAGENAME, stdin);
+		//saveFile(str, rows, columns, inputarrayhere);
 	}
 
 }
 
+void brightenImage(int rows, int columns, int inputarrayhere[][columns]){
+	char answer;
+	char str[IMAGENAME];
+	for(int rowi=0; rowi<rows; rowi++){
+		for(int coli=0; coli<columns; coli++){
+			if(inputarrayhere[rowi][coli] < 5){
+				inputarrayhere[rowi][coli]++;
+			}
+		}
+	}
+	
+	//displayimage(rows, columns, inputarrayhere);
+	
+	printf("\nWould you like to save the file? (y/n)" );
+	scanf(" %c", &answer);
+	
+	if(answer == 'y' || answer == 'Y'){
+		printf("\nWhat do you want to name the image file? (include the extension) ");
+		fgets(str, IMAGENAME, stdin);
+		//saveFile(str, rows, columns, inputarrayhere);
+	}
+
+}
+
+void saveFile(char filename, int rows, int columns, int newarrayhere[][columns]){}
