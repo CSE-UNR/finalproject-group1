@@ -15,7 +15,7 @@ int displaymenu();
 void loadimage();
 void dimImage(int rows, int columns, int inputarrayhere[][columns]);
 void brightenImage(int rows, int columns, int inputarrayhere[][columns]);
-void cropImage(int startcolumn, int endcolumn, int startrow, int endrow, int rows, int columns, int inputarrayhere[][columns]);
+void cropImage(int* inputrows, int* inputcolumns, int newCstart, int newCend, int newRstart, int newRend, int inputarrayhere[][*inputcolumns]);
 void saveFile(char filename, int rows, int columns, int newarrayhere[][columns]);
 //void loadImage(FILE* in, int* returnrows, int* returncolumns);
 
@@ -162,6 +162,32 @@ void brightenImage(int rows, int columns, int inputarrayhere[][columns]){
 
 }
 
-void cropImage(int startcolumn, int endcolumn, int startrow, int endrow, int rows, int columns, int inputarrayhere[][columns]){ }
+void cropImage(int* inputrows, int*inputcolumns, int newCstart, int newCend, int newRstart, int newRend, int inputarrayhere[][*inputcolumns]){
+	char answer;
+	char str[IMAGENAME];
+	
+	for(int rowi = 0; rowi < *inputrows; rowi++){
+		for(int coli = 0; coli < newCend; coli++){
+			inputarrayhere[rowi][coli] = inputarrayhere[rowi][newCstart - 1];
+		}
+	}
+	
+	for(int coli = 0; coli < newCend; coli++){
+		for(int rowi = 0; rowi < newRend; rowi++){
+			inputarrayhere[rowi][coli] = inputarrayhere[newRstart - 1][coli];
+		}
+	}
+	
+	//displayimage(inputrows, inputcolumns, inputarrayhere);
+	
+	printf("\nWould you like to save the file? (y/n)" );
+	scanf(" %c", &answer);
+	
+	if(answer == 'y' || answer == 'Y'){
+		printf("\nWhat do you want to name the image file? (include the extension) ");
+		fgets(str, IMAGENAME, stdin);
+		//saveFile(str, rows, columns, inputarrayhere);
+	}
+}
 
 void saveFile(char filename, int rows, int columns, int newarrayhere[][columns]){}
