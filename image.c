@@ -15,7 +15,7 @@ int displaymenu();
 void loadimage();
 void dimImage(int rows, int columns, int inputarrayhere[][columns]);
 void brightenImage(int rows, int columns, int inputarrayhere[][columns]);
-void cropImage(int* inputrows, int* inputcolumns, int newCstart, int newCend, int newRstart, int newRend, int inputarrayhere[][*inputcolumns]);
+void cropImage(int* inputrows, int* inputcolumns, int inputarrayhere[][*inputcolumns]);
 void saveFile(char filename, int rows, int columns, int newarrayhere[][columns]);
 //void loadImage(FILE* in, int* returnrows, int* returncolumns);
 
@@ -52,7 +52,7 @@ int choice;
     printf("0. Exit\n");
     printf("\nChoose from one of the options above: ");
     scanf("%d", &choice);
-
+    
 
     return choice;
 
@@ -162,9 +162,22 @@ void brightenImage(int rows, int columns, int inputarrayhere[][columns]){
 
 }
 
-void cropImage(int* inputrows, int*inputcolumns, int newCstart, int newCend, int newRstart, int newRend, int inputarrayhere[][*inputcolumns]){
+void cropImage(int* inputrows, int*inputcolumns, int inputarrayhere[][*inputcolumns]){
+	int newCstart, newCend, newRstart, newRend;
 	char answer;
 	char str[IMAGENAME];
+
+	printf("\n1 x %d", *inputcolumns);
+	//displayimage(rows, columns, inputarrayhere);
+	printf("\n%d", *inputrows);
+	printf("\nThe image you want to crop is %d x %d.\nThe rows and columns start at 1 on the upper left-hand side.\n\nWhich column do you want to be the new left side? ", *inputrows, *inputcolumns);
+	scanf("%d", &newCstart);
+	printf("\nWhich column do you want to be the new right side? ");
+	scanf("%d", &newCend);
+	printf("\nWhich row do you want to be the new top? ");
+	scanf("%d", &newRstart);
+	printf("\nWhich row do you want to be the new bottom? ");
+	scanf("%d", &newRend);
 	
 	for(int rowi = 0; rowi < *inputrows; rowi++){
 		for(int coli = 0; coli < newCend; coli++){
