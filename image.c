@@ -13,9 +13,10 @@ Purpose: To be able to take an image and edit it per user's preference such as d
 
 int displaymenu();
 void loadimage();
+void dimImage(int rows, int columns, int inputarrayhere[][columns]);
 
 int main (){
-int 2Darray[MAX_ROWS][MAX_COLUMNS];
+int imagearray[MAX_ROWS][MAX_COLUMNS];
 
     int choicefinal;
     do{
@@ -89,3 +90,16 @@ void displayimage(int choicefinal){
 
 
 }
+
+void dimImage(int rows, int columns, int inputarrayhere[][columns]){
+	for(int rowi=0; rowi<=rows; rowi++){
+		for(int coli=0; coli<columns; coli++){
+			if(inputarrayhere[rowi][coli] > 0){
+				inputarrayhere[rowi][coli]--;
+			}
+		}
+	//displayimage(rows, columns, inputarrayhere);
+	}
+
+}
+
