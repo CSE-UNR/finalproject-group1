@@ -199,8 +199,17 @@ void cropImage(int* inputrows, int*inputcolumns, int inputarrayhere[][*inputcolu
 	if(answer == 'y' || answer == 'Y'){
 		printf("\nWhat do you want to name the image file? (include the extension) ");
 		fgets(str, IMAGENAME, stdin);
-		//saveFile(str, rows, columns, inputarrayhere);
+		//saveFile(str, newRend, newCend, inputarrayhere);
 	}
 }
 
-void saveFile(char filename, int rows, int columns, int newarrayhere[][columns]){}
+void saveFile(char filename, int rows, int columns, int newarrayhere[][columns]){
+	FILE* fptr;
+	fptr = fopen("filename", "w");
+	for(int rowi = 0; rowi < rows; rowi++){
+		for(int coli = 0; coli< columns; coli++){
+			fprintf(fptr, "%d", newarrayhere[rowi][coli]);
+		}
+	}
+	fclose(fptr);
+}
