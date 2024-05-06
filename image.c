@@ -8,8 +8,8 @@ Purpose: To be able to take an image and edit it per user's preference such as d
 #include <stdio.h>
 
 #define IMAGENAME 100
-#define MAX_ROWS 100
-#define MAX_COLUMNS 100
+#define MAX_ROWS 999
+#define MAX_COLUMNS 999
 
 int displaymenu();
 void loadimage();
@@ -17,9 +17,11 @@ void dimImage(int rows, int columns, int inputarrayhere[][columns]);
 void brightenImage(int rows, int columns, int inputarrayhere[][columns]);
 void cropImage(int startcolumn, int endcolumn, int startrow, int endrow, int rows, int columns, int inputarrayhere[][columns]);
 void saveFile(char filename, int rows, int columns, int newarrayhere[][columns]);
+//void loadImage(FILE* in, int* returnrows, int* returncolumns);
 
 int main (){
 int imagearray[MAX_ROWS][MAX_COLUMNS];
+int* imagerows, *imagecolumns;
 
     int choicefinal;
     do{
@@ -58,6 +60,7 @@ int choice;
 }
 
 void loadimage(int choicefinal){
+//int* imagerows, *imagecolumns;
     if(choicefinal == 1){
 
         char imagename[IMAGENAME];
@@ -75,6 +78,7 @@ void loadimage(int choicefinal){
         }
 
         else{
+        //loadImage(imagename, &imagerows, &imagecolumns);
 
             fclose(image);
             printf("\nImage successfully loaded!\n\n");
@@ -83,6 +87,22 @@ void loadimage(int choicefinal){
         }
 
 }
+
+/* void loadImage(FILE* in, int* returnrows, int* returncolumns){
+	int check, check2 = 0, checkchar = 0;
+	int character = 0;
+		while(fscanf(fin, "%d", &check) == 1){
+			check2++;
+			// make check2 into a pointer
+		}
+		for(int i = 0; i<check2; i++){
+			while(fscanf(fin, " %d", &character) == 1){
+				checkchar++;
+				//make checkchar into a pointer
+			}
+		}
+	}
+		*/
         
 void displayimage(int choicefinal){
 
