@@ -20,8 +20,7 @@ void loadImage(FILE* fin, int* colPtr, int* rowPtr, int inputarrayhere[][MAX_COL
 
 int main (){
 int imagearray[MAX_ROWS][MAX_COLUMNS];
-int imagerows;
-int imagecolumns;
+int imagerows, imagecolumns, editchoice;
 FILE* fptr;
 char imagename[IMAGENAME];
 
@@ -47,8 +46,29 @@ char imagename[IMAGENAME];
 		
 		break;
 		case 2:
+		
 		break;
 		case 3:
+		
+			//editchoice = editImageMenu();
+			switch(editchoice){
+				case 1:
+				fptr = fopen(imagename, "r");
+				
+				if(fptr == NULL){
+					printf("Could not open file!\n");
+				}
+				
+				else{
+				
+				}
+				break;
+				case 2:
+				fptr = fopen(imagename, "r");
+				break;
+				case 3:
+				break;
+			}
 		break;
 	}
 	
@@ -131,8 +151,8 @@ void dimImage(int rows, int columns, int inputarrayhere[][columns]){
 	
 	if(answer == 'y' || answer == 'Y'){
 		printf("\nWhat do you want to name the image file? (include the extension) ");
-		fgets(str, IMAGENAME, stdin);
-		//saveFile(str, rows, columns, inputarrayhere);
+		scanf("%s", str);
+		saveFile(str, rows, columns, inputarrayhere);
 	}
 
 }
@@ -155,8 +175,8 @@ void brightenImage(int rows, int columns, int inputarrayhere[][columns]){
 	
 	if(answer == 'y' || answer == 'Y'){
 		printf("\nWhat do you want to name the image file? (include the extension) ");
-		fgets(str, IMAGENAME, stdin);
-		//saveFile(str, rows, columns, inputarrayhere);
+		scanf("%s", str);
+		saveFile(str, rows, columns, inputarrayhere);
 	}
 
 }
@@ -197,8 +217,8 @@ void cropImage(int* inputrows, int*inputcolumns, int inputarrayhere[][*inputcolu
 	
 	if(answer == 'y' || answer == 'Y'){
 		printf("\nWhat do you want to name the image file? (include the extension) ");
-		fgets(str, IMAGENAME, stdin);
-		//saveFile(str, newRend, newCend, inputarrayhere);
+		scanf("%s", str);
+		saveFile(str, newRend, newCend, inputarrayhere);
 	}
 }
 
