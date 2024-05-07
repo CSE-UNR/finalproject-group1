@@ -1,5 +1,5 @@
 /*
-Name: Rahul Bokka and Lorena
+Name: Rahul Bokka and Lorena Rocha 
 Date: 04 May 2024
 Purpose: To be able to take an image and edit it per user's preference such as dim, brighten, rotate
 */
@@ -128,6 +128,11 @@ void displayimage(int choicefinal){
     if(choicefinal == 2){
         
     }
+
+void editImage(int choicefinal){
+
+	
+}
 
 
 
