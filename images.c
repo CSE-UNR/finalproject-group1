@@ -50,16 +50,14 @@ char imagename[IMAGENAME];
 		break;
 		
 		case 2:
-        fptr = fopen(imagename, "r");
-        
-        if(fptr == NULL){
-        	printf("Sorry, no image to display.\n");
-        }
-    	    else{
-	
-      	  displayimage(imagerows, imagecolumns, imagearray);
-      	  fclose(fptr);
-        }
+		fptr = fopen(imagename, "r");
+		if(fptr == NULL){
+		printf("can't open file.\n");
+		}
+		else{
+		displayimage(imagerows, imagecolumns, imagearray);
+		fclose(fptr);
+		}
 		break;
 		
 		case 3:
@@ -144,20 +142,32 @@ void loadImage(FILE* fin, int* colPtr, int* rowPtr, int inputarrayhere[][MAX_COL
 void displayimage(int imagerows, int imagecolumns, int inputarrayhere[][MAX_COLUMNS]){
     for(int row = 0; row < imagerows; row++){
         for(int col = 0; col < imagecolumns; col++){
-			if(inputarrayhere[row][col] == 0){
-				printf(" ");
-			}
-			if(inputarrayhere[row][col] == 1){
-				printf("%c", inputarrayhere[row][col]);
-			}
-			else if(inputarrayhere[row][col] == '\n'){
-				printf("\n");
-			}
-          
+        	switch(inputarrayhere[row][col]){
+        		case 0:
+        		printf(" ");
+        		break;
+        		
+        		case 1:
+        		printf(".");
+        		break;
+        		
+        		case 2:
+        		printf("o");
+        		break;
+        		
+        		case 3:
+        		printf("O");
+        		break;
+        		
+        		case 4:
+        		printf("0");
+        		break;
+        	}
+        if(col == imagecolumns-1){
+    	printf("\n");
     }
-
-    }
-        
+    } 
+    }   
     }
 
 int editImage(){
