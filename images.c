@@ -57,7 +57,7 @@ char imagename[IMAGENAME];
         }
     	    else{
 	
-      	  displayimage(imagecolumns, imagerows, imagearray);
+      	  displayimage(imagerows, imagecolumns, imagearray);
       	  fclose(fptr);
         }
 		break;
@@ -141,10 +141,19 @@ void loadImage(FILE* fin, int* colPtr, int* rowPtr, int inputarrayhere[][MAX_COL
 	*rowPtr = rows;
 }
         
-void displayimage(int rows, int columns, int inputarrayhere[][columns]){
-    for(int row = 0; row < rows; row++){
-        for(int col = 0; col < columns; col++){
-            printf("%d", inputarrayhere[rows][col]);
+void displayimage(int imagerows, int imagecolumns, int inputarrayhere[][MAX_COLUMNS]){
+    for(int row = 0; row < imagerows; row++){
+        for(int col = 0; col < imagecolumns; col++){
+			if(inputarrayhere[row][col] == 0){
+				printf(" ");
+			}
+			if(inputarrayhere[row][col] == 1){
+				printf("%c", inputarrayhere[row][col]);
+			}
+			else if(inputarrayhere[row][col] == '\n'){
+				printf("\n");
+			}
+          
     }
 
     }
