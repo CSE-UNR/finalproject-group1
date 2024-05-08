@@ -14,22 +14,22 @@ Purpose: To be able to take an image and edit it per user's preference such as d
 int displaymenu();
 void displayimage(int rows, int columns, int inputarrayhere[][columns]);
 void dimImage(int rows, int columns, int inputarrayhere[][columns]);
-void brightenImage(int rows, int columns, int inputarrayhere[][columns]);
-// void cropImage(int* inputrows, int* inputcolumns, int inputarrayhere[][*inputcolumns]);
-void saveFile(char filename, int rows, int columns, int newarrayhere[][columns]);
+void brightenImage(int* inputrows, int* inputcolumns, int inputarrayhere[][*inputcolumns]);
+void cropImage(int* inputrows, int* inputcolumns, int inputarrayhere[][*inputcolumns]);
+void saveFile(char filename[], int rows, int columns, int newarrayhere[][columns]);
 void loadImage(FILE* fin, int* colPtr, int* rowPtr, int inputarrayhere[][MAX_COLUMNS]);
-void editImage();
+int editImage();
 
 int main (){
 int imagearray[MAX_ROWS][MAX_COLUMNS];
-int imagerows;
-int imagecolumns;
+int imagerows, imagecolumns, editchoice;
 FILE* fptr;
 char imagename[IMAGENAME];
 
     int choicefinal;
     do{
         choicefinal = displaymenu();
+        
 	switch(choicefinal){
 		case 1:
 		
@@ -48,40 +48,50 @@ char imagename[IMAGENAME];
 		}
 		
 		break;
+		
 		case 2:
         fptr = fopen(imagename, "r");
-        displayimage(imagecolumns, imagerows, imagearray);
+        
+        if(fptr == NULL){
+        	printf("Sorry, no image to display.\n");
+        }
+    	    else{
+	
+      	  displayimage(imagecolumns, imagerows, imagearray);
+      	  fclose(fptr);
+        }
 		break;
+		
 		case 3:
 
-        fptr = fopen(imagename, "r");
+       		fptr = fopen(imagename, "r");
 		if(fptr == NULL){
-		    printf("Sorry, no image to edit\n");
-            }
+		    printf("Sorry, no image to edit.\n");
+         	}
         
-        else{
+       		else{
             
-        editImage();
+		   editchoice = editImage();
 
-        int editchoice;
-
-        printf("Choose from one of the options above: ");
-        scanf("%d", &editchoice);
-
-        switch(editchoice){
+		   switch(editchoice){
 				case 1:
+				
+				//cropImage();
                
 				break;
 				case 2:
-                
-				fptr = fopen(imagename, "r");
+               			
+               			//dimImage();
+               
 				break;
 				case 3:
+				
+				//brightenImage();
 				break;
-			}
+		  }
+		  fclose(fptr);
+	       }
 		break;
-	}
-
 	}
 	
     }while(choicefinal != 0);
@@ -141,20 +151,25 @@ void displayimage(int rows, int columns, int inputarrayhere[][columns]){
         
     }
 
-void editImage(){
+int editImage(){
+	int choice;
 
+	printf("Choose from one of the options above: ");
 	printf("\n**EDITING**\n");
 	printf("1. Crop image\n");
 	printf("2. Dim image\n");
 	printf("3. Brighten image\n");
 	printf("0. Return to main menu\n\n");
-			
+	
+	scanf("%d", &choice);
+
+	return choice;	
 }
 
 
 
 
-void dimImage(int rows, int columns, int inputarrayhere[][columns]){
+/*void dimImage(int rows, int columns, int inputarrayhere[][columns]){
 	char answer;
 	char str[IMAGENAME];
 	for(int rowi=0; rowi<rows; rowi++){
@@ -178,7 +193,7 @@ void dimImage(int rows, int columns, int inputarrayhere[][columns]){
 
 }
 
-void brightenImage(int rows, int columns, int inputarrayhere[][columns]){
+void brightenImage(int* inputrows, int* inputcolumns, int inputarrayhere[][columns]){
 	char answer;
 	char str[IMAGENAME];
 	for(int rowi=0; rowi<rows; rowi++){
@@ -202,47 +217,46 @@ void brightenImage(int rows, int columns, int inputarrayhere[][columns]){
 
 }
 
-// void cropImage(int editchoice, int* inputrows, int*inputcolumns, int inputarrayhere[][*inputcolumns]){
+void cropImage(int* inputrows, int*inputcolumns, int inputarrayhere[][*inputcolumns]){
+	int newCstart, newCend, newRstart, newRend;
+	char answer;
+	char str[IMAGENAME];
 
-//     int newCstart, newCend, newRstart, newRend;
-// 	char answer;
-// 	char str[IMAGENAME];
-
-// 	printf("\n1 x %d", *inputcolumns);
-// 	//displayimage(rows, columns, inputarrayhere);
-// 	printf("\n%d", *inputrows);
-// 	printf("\nThe image you want to crop is %d x %d.\nThe rows and columns start at 1 on the upper left-hand side.\n\nWhich column do you want to be the new left side? ", *inputrows, *inputcolumns);
-// 	scanf("%d", &newCstart);
-// 	printf("\nWhich column do you want to be the new right side? ");
-// 	scanf("%d", &newCend);
-// 	printf("\nWhich row do you want to be the new top? ");
-// 	scanf("%d", &newRstart);
-// 	printf("\nWhich row do you want to be the new bottom? ");
-// 	scanf("%d", &newRend);
+	printf("\n1 x %d", *inputcolumns);
+	//displayimage(rows, columns, inputarrayhere);
+	printf("\n%d", *inputrows);
+	printf("\nThe image you want to crop is %d x %d.\nThe rows and columns start at 1 on the upper left-hand side.\n\nWhich column do you want to be the new left side? ", *inputrows, *inputcolumns);
+	scanf("%d", &newCstart);
+	printf("\nWhich column do you want to be the new right side? ");
+	scanf("%d", &newCend);
+	printf("\nWhich row do you want to be the new top? ");
+	scanf("%d", &newRstart);
+	printf("\nWhich row do you want to be the new bottom? ");
+	scanf("%d", &newRend);
 	
-// 	for(int rowi = 0; rowi < *inputrows; rowi++){
-// 		for(int coli = 0; coli < newCend; coli++){
-// 			inputarrayhere[rowi][coli] = inputarrayhere[rowi][newCstart - 1];
-// 		}
-// 	}
+	for(int rowi = 0; rowi < *inputrows; rowi++){
+		for(int coli = 0; coli < newCend; coli++){
+			inputarrayhere[rowi][coli] = inputarrayhere[rowi][newCstart - 1];
+		}
+	}
 	
-// 	for(int coli = 0; coli < newCend; coli++){
-// 		for(int rowi = 0; rowi < newRend; rowi++){
-// 			inputarrayhere[rowi][coli] = inputarrayhere[newRstart - 1][coli];
-// 		}
-// 	}
+	for(int coli = 0; coli < newCend; coli++){
+		for(int rowi = 0; rowi < newRend; rowi++){
+			inputarrayhere[rowi][coli] = inputarrayhere[newRstart - 1][coli];
+		}
+	}
 	
-// 	//displayimage(inputrows, inputcolumns, inputarrayhere);
+	//displayimage(inputrows, inputcolumns, inputarrayhere);
 	
-// 	printf("\nWould you like to save the file? (y/n)" );
-// 	scanf(" %c", &answer);
+	printf("\nWould you like to save the file? (y/n)" );
+	scanf(" %c", &answer);
 	
-// 	if(answer == 'y' || answer == 'Y'){
-// 		printf("\nWhat do you want to name the image file? (include the extension) ");
-// 		fgets(str, IMAGENAME, stdin);
-// 		//saveFile(str, newRend, newCend, inputarrayhere);
-// 	}
-// }
+	if(answer == 'y' || answer == 'Y'){
+		printf("\nWhat do you want to name the image file? (include the extension) ");
+		scanf("%s", str);
+		saveFile(str, newRend, newCend, inputarrayhere);
+	}
+}
 
 void saveFile(char filename, int rows, int columns, int newarrayhere[][columns]){
 	FILE* fptr;
@@ -254,3 +268,4 @@ void saveFile(char filename, int rows, int columns, int newarrayhere[][columns])
 	}
 	fclose(fptr);
 }
+*/
