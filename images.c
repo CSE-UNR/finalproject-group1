@@ -52,7 +52,7 @@ char imagename[IMAGENAME];
 		case 2:
 		fptr = fopen(imagename, "r");
 		if(fptr == NULL){
-		printf("can't open file.\n");
+		printf("Can't open file.\n");
 		}
 		else{
 		displayimage(imagerows, imagecolumns, imagearray);
