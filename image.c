@@ -67,20 +67,11 @@ char imagename[IMAGENAME];
 
         switch(editchoice){
 				case 1:
-				if(editchoice == 1){
-                    cropImage();
-                }
-				
-				
-                if(fptr == NULL){
-					printf("Could not open file!\n");
-				}
-				
-				else{
-				
-				}
+                fptr = fopen(imagename, "r");
+                void cropImage(int* inputrows, int*inputcolumns, int inputarrayhere[][*inputcolumns]);
 				break;
 				case 2:
+                
 				fptr = fopen(imagename, "r");
 				break;
 				case 3:
@@ -138,12 +129,15 @@ void loadImage(FILE* fin, int* colPtr, int* rowPtr, int inputarrayhere[][MAX_COL
 	*rowPtr = rows;
 }
         
-void displayimage(int choicefinal){
+void displayimage(int rows, int columns, int inputarrayhere[][columns]){
+    for(int rowsss = 0; rowsss < rows; rows+++){
+        for(int collss = 0; collss < cols)
+            printf("%d")
+    }
 
-    if(choicefinal == 2){
+
         
     }
-}
 
 void editImage(){
 
@@ -206,8 +200,9 @@ void brightenImage(int rows, int columns, int inputarrayhere[][columns]){
 
 }
 
-void cropImage(int* inputrows, int*inputcolumns, int inputarrayhere[][*inputcolumns]){
-	int newCstart, newCend, newRstart, newRend;
+void cropImage(int editchoice, int* inputrows, int*inputcolumns, int inputarrayhere[][*inputcolumns]){
+
+    int newCstart, newCend, newRstart, newRend;
 	char answer;
 	char str[IMAGENAME];
 
