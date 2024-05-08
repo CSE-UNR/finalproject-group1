@@ -1,5 +1,5 @@
 /*
-Name: Rahul Bokka and Lorena
+Name: Rahul Bokka and Lorena Rocha
 Date: 04 May 2024
 Purpose: To be able to take an image and edit it per user's preference such as dim, brighten, rotate
 */
@@ -108,7 +108,7 @@ int displaymenu(){
 
 int choice; 
 
-    printf("**ERINSTAGRAM**\n");
+    printf("\n**ERINSTAGRAM**\n");
     printf("1. Load Image\n");
     printf("2. Display image\n");
     printf("3. Edit image\n");
