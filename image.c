@@ -12,9 +12,10 @@ Purpose: To be able to take an image and edit it per user's preference such as d
 #define MAX_COLUMNS 999
 
 int displaymenu();
+void displayimage(int rows, int columns, int inputarrayhere[][columns]);
 void dimImage(int rows, int columns, int inputarrayhere[][columns]);
 void brightenImage(int rows, int columns, int inputarrayhere[][columns]);
-void cropImage(int* inputrows, int* inputcolumns, int inputarrayhere[][*inputcolumns]);
+// void cropImage(int* inputrows, int* inputcolumns, int inputarrayhere[][*inputcolumns]);
 void saveFile(char filename, int rows, int columns, int newarrayhere[][columns]);
 void loadImage(FILE* fin, int* colPtr, int* rowPtr, int inputarrayhere[][MAX_COLUMNS]);
 void editImage();
@@ -48,6 +49,8 @@ char imagename[IMAGENAME];
 		
 		break;
 		case 2:
+        fptr = fopen(imagename, "r");
+        displayimage(imagecolumns, imagerows, imagearray);
 		break;
 		case 3:
 
@@ -67,8 +70,7 @@ char imagename[IMAGENAME];
 
         switch(editchoice){
 				case 1:
-                fptr = fopen(imagename, "r");
-                void cropImage(int* inputrows, int*inputcolumns, int inputarrayhere[][*inputcolumns]);
+               
 				break;
 				case 2:
                 
@@ -130,12 +132,12 @@ void loadImage(FILE* fin, int* colPtr, int* rowPtr, int inputarrayhere[][MAX_COL
 }
         
 void displayimage(int rows, int columns, int inputarrayhere[][columns]){
-    for(int rowsss = 0; rowsss < rows; rows+++){
-        for(int collss = 0; collss < cols)
-            printf("%d")
+    for(int row = 0; row < rows; row++){
+        for(int col = 0; col < columns; col++){
+            printf("%d", inputarrayhere[rows][col]);
     }
 
-
+    }
         
     }
 
@@ -200,47 +202,47 @@ void brightenImage(int rows, int columns, int inputarrayhere[][columns]){
 
 }
 
-void cropImage(int editchoice, int* inputrows, int*inputcolumns, int inputarrayhere[][*inputcolumns]){
+// void cropImage(int editchoice, int* inputrows, int*inputcolumns, int inputarrayhere[][*inputcolumns]){
 
-    int newCstart, newCend, newRstart, newRend;
-	char answer;
-	char str[IMAGENAME];
+//     int newCstart, newCend, newRstart, newRend;
+// 	char answer;
+// 	char str[IMAGENAME];
 
-	printf("\n1 x %d", *inputcolumns);
-	//displayimage(rows, columns, inputarrayhere);
-	printf("\n%d", *inputrows);
-	printf("\nThe image you want to crop is %d x %d.\nThe rows and columns start at 1 on the upper left-hand side.\n\nWhich column do you want to be the new left side? ", *inputrows, *inputcolumns);
-	scanf("%d", &newCstart);
-	printf("\nWhich column do you want to be the new right side? ");
-	scanf("%d", &newCend);
-	printf("\nWhich row do you want to be the new top? ");
-	scanf("%d", &newRstart);
-	printf("\nWhich row do you want to be the new bottom? ");
-	scanf("%d", &newRend);
+// 	printf("\n1 x %d", *inputcolumns);
+// 	//displayimage(rows, columns, inputarrayhere);
+// 	printf("\n%d", *inputrows);
+// 	printf("\nThe image you want to crop is %d x %d.\nThe rows and columns start at 1 on the upper left-hand side.\n\nWhich column do you want to be the new left side? ", *inputrows, *inputcolumns);
+// 	scanf("%d", &newCstart);
+// 	printf("\nWhich column do you want to be the new right side? ");
+// 	scanf("%d", &newCend);
+// 	printf("\nWhich row do you want to be the new top? ");
+// 	scanf("%d", &newRstart);
+// 	printf("\nWhich row do you want to be the new bottom? ");
+// 	scanf("%d", &newRend);
 	
-	for(int rowi = 0; rowi < *inputrows; rowi++){
-		for(int coli = 0; coli < newCend; coli++){
-			inputarrayhere[rowi][coli] = inputarrayhere[rowi][newCstart - 1];
-		}
-	}
+// 	for(int rowi = 0; rowi < *inputrows; rowi++){
+// 		for(int coli = 0; coli < newCend; coli++){
+// 			inputarrayhere[rowi][coli] = inputarrayhere[rowi][newCstart - 1];
+// 		}
+// 	}
 	
-	for(int coli = 0; coli < newCend; coli++){
-		for(int rowi = 0; rowi < newRend; rowi++){
-			inputarrayhere[rowi][coli] = inputarrayhere[newRstart - 1][coli];
-		}
-	}
+// 	for(int coli = 0; coli < newCend; coli++){
+// 		for(int rowi = 0; rowi < newRend; rowi++){
+// 			inputarrayhere[rowi][coli] = inputarrayhere[newRstart - 1][coli];
+// 		}
+// 	}
 	
-	//displayimage(inputrows, inputcolumns, inputarrayhere);
+// 	//displayimage(inputrows, inputcolumns, inputarrayhere);
 	
-	printf("\nWould you like to save the file? (y/n)" );
-	scanf(" %c", &answer);
+// 	printf("\nWould you like to save the file? (y/n)" );
+// 	scanf(" %c", &answer);
 	
-	if(answer == 'y' || answer == 'Y'){
-		printf("\nWhat do you want to name the image file? (include the extension) ");
-		fgets(str, IMAGENAME, stdin);
-		//saveFile(str, newRend, newCend, inputarrayhere);
-	}
-}
+// 	if(answer == 'y' || answer == 'Y'){
+// 		printf("\nWhat do you want to name the image file? (include the extension) ");
+// 		fgets(str, IMAGENAME, stdin);
+// 		//saveFile(str, newRend, newCend, inputarrayhere);
+// 	}
+// }
 
 void saveFile(char filename, int rows, int columns, int newarrayhere[][columns]){
 	FILE* fptr;
