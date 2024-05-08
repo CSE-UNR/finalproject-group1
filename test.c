@@ -1,5 +1,5 @@
 /*
-Name: Rahul Bokka and Lorena Rocha 
+Name: Rahul Bokka and Lorena
 Date: 04 May 2024
 Purpose: To be able to take an image and edit it per user's preference such as dim, brighten, rotate
 */
@@ -16,8 +16,7 @@ void dimImage(int rows, int columns, int inputarrayhere[][columns]);
 void brightenImage(int rows, int columns, int inputarrayhere[][columns]);
 void cropImage(int* inputrows, int* inputcolumns, int inputarrayhere[][*inputcolumns]);
 void saveFile(char filename[], int rows, int columns, int newarrayhere[][columns]);
-void loadImage(FILE* fin, int* colPtr, int* rowPtr, int inputarrayhere[][MAX_COLUMNS]);
-void editImage();
+void loadImage(int choicefinal, FILE* fin, int* colPtr, int* rowPtr, int inputarrayhere[][MAX_COLUMNS]);
 
 int main (){
 int imagearray[MAX_ROWS][MAX_COLUMNS];
@@ -28,7 +27,6 @@ char imagename[IMAGENAME];
     int choicefinal;
     do{
         choicefinal = displaymenu();
-	
 	switch(choicefinal){
 		case 1:
 		
@@ -41,7 +39,7 @@ char imagename[IMAGENAME];
 		}
 		
 		else{
-			loadImage(fptr, &imagecolumns, &imagerows, imagearray);
+			loadImage(choicefinal, fptr, &imagecolumns, &imagerows, imagearray);
 			fclose(fptr);
 			printf("Image successfully loaded!\n");
 		}
@@ -51,17 +49,11 @@ char imagename[IMAGENAME];
 		
 		break;
 		case 3:
-
-		fptr = fopen(imagename, "a");
-		if(fptr == NULL){
-			printf("Sorry, no image to edit\n");
 		
 			//editchoice = editImageMenu();
-			editImage();
 			switch(editchoice){
 				case 1:
 				fptr = fopen(imagename, "r");
-			
 				
 				if(fptr == NULL){
 					printf("Could not open file!\n");
@@ -78,9 +70,10 @@ char imagename[IMAGENAME];
 				break;
 			}
 		break;
-	}}
+	}
 	
     }while(choicefinal != 0);
+    loadImage(choicefinal, fptr, &imagecolumns, &imagerows, imagearray);
     
     
     if(choicefinal == 0){
@@ -90,6 +83,8 @@ char imagename[IMAGENAME];
     }
 
     return 0;    
+
+
 }
 
 int displaymenu(){
@@ -110,7 +105,8 @@ int choice;
 
 }
 
-void loadImage(FILE* fin, int* colPtr, int* rowPtr, int inputarrayhere[][MAX_COLUMNS]){
+void loadImage(int choicefinal, FILE* fin, int* colPtr, int* rowPtr, int inputarrayhere[][MAX_COLUMNS]){
+	if(choicefinal == 1){
 	int rows = 0, cols = 0;
 	char temp;
 	
@@ -128,25 +124,17 @@ void loadImage(FILE* fin, int* colPtr, int* rowPtr, int inputarrayhere[][MAX_COL
 	*colPtr = cols+1;
 	*rowPtr = rows;
 }
+}
         
 void displayimage(int choicefinal){
 
     if(choicefinal == 2){
-
         
     }
+
+
+
 }
-
-void editImage(){
-	
-		printf("\n**EDITING**\n");
-		printf("1. Crop image\n");
-		printf("2. Dim image\n");
-		printf("3. Brighten image\n");
-		printf("0. Return to main menu\n");
-			
-	}
-
 
 void dimImage(int rows, int columns, int inputarrayhere[][columns]){
 	char answer;
