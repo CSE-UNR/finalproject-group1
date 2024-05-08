@@ -17,6 +17,7 @@ void brightenImage(int rows, int columns, int inputarrayhere[][columns]);
 void cropImage(int* inputrows, int* inputcolumns, int inputarrayhere[][*inputcolumns]);
 void saveFile(char filename, int rows, int columns, int newarrayhere[][columns]);
 void loadImage(FILE* fin, int* colPtr, int* rowPtr, int inputarrayhere[][MAX_COLUMNS]);
+void editImage();
 
 int main (){
 int imagearray[MAX_ROWS][MAX_COLUMNS];
@@ -36,7 +37,7 @@ char imagename[IMAGENAME];
        		
 		fptr = fopen(imagename, "r");
 		if(fptr == NULL){
-			printf("Could not open file!\n");
+			printf("Could not open file!\n\n");
 		}
 		
 		else{
@@ -49,11 +50,48 @@ char imagename[IMAGENAME];
 		case 2:
 		break;
 		case 3:
+
+        fptr = fopen(imagename, "r");
+		if(fptr == NULL){
+		    printf("Sorry, no image to edit\n");
+            }
+        
+        else{
+            
+        editImage();
+
+        int editchoice;
+
+        printf("Choose from one of the options above: ");
+        scanf("%d", &editchoice);
+
+        switch(editchoice){
+				case 1:
+				if(editchoice == 1){
+                    cropImage();
+                }
+				
+				
+                if(fptr == NULL){
+					printf("Could not open file!\n");
+				}
+				
+				else{
+				
+				}
+				break;
+				case 2:
+				fptr = fopen(imagename, "r");
+				break;
+				case 3:
+				break;
+			}
 		break;
+	}
+
 	}
 	
     }while(choicefinal != 0);
-    
     
     if(choicefinal == 0){
 
@@ -62,7 +100,6 @@ char imagename[IMAGENAME];
     }
 
     return 0;    
-
 
 }
 
@@ -78,9 +115,7 @@ int choice;
     printf("\nChoose from one of the options above: ");
     scanf("%d", &choice);
     
-
     return choice;
-
 
 }
 
@@ -108,10 +143,20 @@ void displayimage(int choicefinal){
     if(choicefinal == 2){
         
     }
-
-
-
 }
+
+void editImage(){
+
+	printf("\n**EDITING**\n");
+	printf("1. Crop image\n");
+	printf("2. Dim image\n");
+	printf("3. Brighten image\n");
+	printf("0. Return to main menu\n\n");
+			
+}
+
+
+
 
 void dimImage(int rows, int columns, int inputarrayhere[][columns]){
 	char answer;
